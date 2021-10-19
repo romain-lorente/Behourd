@@ -55,6 +55,23 @@ namespace Behourd.Test
                             "alors il est présent à la partie suivante")]
         public void Player_Is_Included_In_Next_Game()
         {
+            //Arrange = GIVEN = Etant Donné
+            var joueursInitiaux = JoueurGenerator.Generate(2).ToArray();
+            var session = new Session(joueursInitiaux);
+            var partie = session.DémarrerPartie();
+
+            //Act = WHEN = Quand
+
+            var joueurEnPlus = JoueurBuilder.Stub;
+            session.AddPlayer(joueurEnPlus);
+            var partie1 = session.DémarrerPartie();
+            var joueursPartie1 = partie1.Équipes.First().Joueurs.Concat(partie1.Équipes.Last().Joueurs).ToArray();
+
+            //Assert = THEN = ALORS
+
+            Assert.Contains<IJoueur>(joueurEnPlus, joueursPartie1);
+
+
         }
 
         //[Fact]
