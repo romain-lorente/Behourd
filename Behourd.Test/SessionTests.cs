@@ -70,9 +70,9 @@ namespace Behourd.Test
             //Assert = THEN = ALORS
 
             Assert.Contains<IJoueur>(joueurEnPlus, joueursPartie);
-
-
         }
+
+
 
         //[Fact]
         //public void Player_Heavy()

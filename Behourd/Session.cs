@@ -24,7 +24,6 @@ namespace Behourd
                 Équipes = new ImmutableÉquipes(joueur);
             }
         }
-
         private class ImmutableÉquipes : IÉquipes
         {
             private readonly IÉquipe _first;
