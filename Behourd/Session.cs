@@ -13,7 +13,13 @@ namespace Behourd
             _joueur = joueur;
         }
 
-        public IPartie DémarrerPartie() => new Partie(new List<IJoueur>(_joueur));
+        public IPartie DémarrerPartie()
+        {
+            if (_joueur.Count < 2)
+                throw new InvalidOperationException();
+
+            return new Partie(new List<IJoueur>(_joueur));
+        }
 
         private class Partie : IPartie
         {
