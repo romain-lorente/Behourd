@@ -14,7 +14,7 @@ namespace Behourd.Test
         public void Two_Players_Make_A_Duel()
         {
             //Arrange = GIVEN = Etant Donné
-            var session = new Session(JoueurGenerator.Generate(2).ToArray());
+            var session = new Session(JoueurGenerator.Generate(2).ToList());
 
             //Act = WHEN = Quand
             var partie = session.DémarrerPartie();
@@ -35,8 +35,8 @@ namespace Behourd.Test
         public void Teams_Are_Immutable()
         {
             //Arrange = GIVEN = Etant Donné
-            var joueursInitiaux = JoueurGenerator.Generate(2).ToArray();
-            var session = new Session(joueursInitiaux);
+            var joueursInitiaux = JoueurGenerator.Generate(2).ToList();
+            var session = new Session(new List<IJoueur>(joueursInitiaux));
             var partie = session.DémarrerPartie();
 
             //Act = WHEN = Quand
@@ -56,7 +56,7 @@ namespace Behourd.Test
         public void Player_Is_Included_In_Next_Game()
         {
             //Arrange = GIVEN = Etant Donné
-            var joueursInitiaux = JoueurGenerator.Generate(2).ToArray();
+            var joueursInitiaux = JoueurGenerator.Generate(2).ToList();
             var session = new Session(joueursInitiaux);
             var partie = session.DémarrerPartie();
 
@@ -65,11 +65,11 @@ namespace Behourd.Test
             var joueurEnPlus = JoueurBuilder.Stub;
             session.AddPlayer(joueurEnPlus);
             var partie1 = session.DémarrerPartie();
-            var joueursPartie1 = partie1.Équipes.First().Joueurs.Concat(partie1.Équipes.Last().Joueurs).ToArray();
+            var joueursPartie = partie1.Équipes.First().Joueurs.Concat(partie1.Équipes.Last().Joueurs).ToArray();
 
             //Assert = THEN = ALORS
 
-            Assert.Contains<IJoueur>(joueurEnPlus, joueursPartie1);
+            Assert.Contains<IJoueur>(joueurEnPlus, joueursPartie);
 
 
         }

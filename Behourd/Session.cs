@@ -1,23 +1,25 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Behourd
 {
     public class Session
     {
-        private readonly IJoueur[] _joueur;
+        private List<IJoueur> _joueur;
 
-        public Session(params IJoueur[] joueur)
+        public Session(List<IJoueur> joueur)
         {
             _joueur = joueur;
         }
 
-        public IPartie DémarrerPartie() => new Partie(_joueur);
+        public IPartie DémarrerPartie() => new Partie(new List<IJoueur>(_joueur));
 
         private class Partie : IPartie
         {
             public IÉquipes Équipes { get; }
 
-            public Partie(IJoueur[] joueur)
+            public Partie(List<IJoueur> joueur)
             {
                 Équipes = new ImmutableÉquipes(joueur);
             }
@@ -28,7 +30,7 @@ namespace Behourd
             private readonly IÉquipe _first;
             private readonly IÉquipe _last;
 
-            public ImmutableÉquipes(IJoueur[] joueurs)
+            public ImmutableÉquipes(List<IJoueur> joueurs)
             {
                 _first = new Équipe(joueurs.First());
                 _last = new Équipe(joueurs.Last());
@@ -54,6 +56,8 @@ namespace Behourd
 
         public void AddPlayer(IJoueur joueurEnPlus)
         {
+            _joueur.Add(joueurEnPlus);
+           
         }
     }
 }
