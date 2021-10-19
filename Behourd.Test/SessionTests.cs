@@ -1,0 +1,78 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using Behourd.Test.Utilities;
+using Xunit;
+
+namespace Behourd.Test
+{
+    public class SessionTests
+    {
+        [Fact(DisplayName = "Étant donné une session ayant deux joueurs, " +
+                            "quand une partie démarre, " +
+                            "alors elle compte deux équipes d'un joueur, chacun différent")]
+        public void Two_Players_Make_A_Duel()
+        {
+            //Arrange = GIVEN = Etant Donné
+            var session = new Session(JoueurGenerator.Generate(2).ToArray());
+
+            //Act = WHEN = Quand
+            var partie = session.DémarrerPartie();
+
+            //Assert = THEN = ALORS
+            var équipes = partie.Équipes;
+
+            Assert.Equal(2, équipes.Nombre);
+            Assert.Single(équipes.First().Joueurs);
+            Assert.Single(équipes.Last().Joueurs);
+
+            Assert.NotSame(équipes.First().Joueurs.Single(), équipes.Last().Joueurs.Single());
+        }
+
+        [Fact(DisplayName = "Étant donné une session ayant une partie débutée " +
+                            "quand un joueur rejoint la session, " +
+                            "alors la liste des joueurs de la partie n'est pas modifié")]
+        public void Teams_Are_Immutable()
+        {
+            //Arrange = GIVEN = Etant Donné
+            var joueursInitiaux = JoueurGenerator.Generate(2).ToArray();
+            var session = new Session(joueursInitiaux);
+            var partie = session.DémarrerPartie();
+
+            //Act = WHEN = Quand
+            var joueurEnPlus = JoueurBuilder.Stub;
+            session.AddPlayer(joueurEnPlus);
+
+            //Assert = THEN = ALORS
+            var joueursPartie = partie.Équipes.First().Joueurs.Concat(partie.Équipes.Last().Joueurs).ToArray();
+
+            Assert.DoesNotContain(joueurEnPlus, joueursPartie);
+            Assert.True(joueursInitiaux.SequenceEqual(joueursPartie));
+        }
+
+        [Fact(DisplayName = "Étant donné une session ayant une partie débutée " +
+                            "quand un joueur rejoint la session, " +
+                            "alors il est présent à la partie suivante")]
+        public void Player_Is_Included_In_Next_Game()
+        {
+        }
+
+        //[Fact]
+        //public void Player_Heavy()
+        //{
+        //    var joueursLégers = JoueurGenerator.GenerateSpecific(
+        //        configuration => configuration
+        //            .WithWeight(45)
+        //            .WithArme(arme => arme.WithWeight(15)), 
+        //        15);
+
+        //    var weights = new Stack<int>(new []{ 90, 75, 120 });
+        //    JoueurBuilder ConfigureNextPlayer(JoueurBuilder joueurBuilder)
+        //    {
+        //        return joueurBuilder.WithWeight(weights.Pop());
+        //    } 
+
+        //    var joueurLourds = JoueurGenerator.GenerateSpecific(ConfigureNextPlayer, 3);
+        //}
+    }
+}

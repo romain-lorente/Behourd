@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behourd", "Behourd\Behourd.csproj", "{B965BAA1-C4F6-411B-8EC9-D6C261388A85}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behourd.Test", "Behourd.Test\Behourd.Test.csproj", "{4C0CF09D-9206-4CA4-BF43-69A7729B4062}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B965BAA1-C4F6-411B-8EC9-D6C261388A85}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B965BAA1-C4F6-411B-8EC9-D6C261388A85}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B965BAA1-C4F6-411B-8EC9-D6C261388A85}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B965BAA1-C4F6-411B-8EC9-D6C261388A85}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7CDB27DF-BE35-4D30-AC7D-8B3A8F43D27E}
+	EndGlobalSection
+EndGlobal
