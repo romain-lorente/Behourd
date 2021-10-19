@@ -72,7 +72,18 @@ namespace Behourd.Test
             Assert.Contains<IJoueur>(joueurEnPlus, joueursPartie);
         }
 
+        [Fact(DisplayName = "Étant donné une création de partie, " +
+                            "quand on possède un nombre de joueurs insuffisant, " +
+                            "alors la partie ne peut pas être créée")]
+        public void Invalid_Game_Creation_Not_Enough_Players()
+        {
+            //Arrange
+            List<IJoueur> joueurs = JoueurGenerator.Generate(1).ToList();
+            Session session = new Session(joueurs);
 
+            //Act, Assert
+            Assert.Throws<System.InvalidOperationException>(() => session.DémarrerPartie());
+        }
 
         //[Fact]
         //public void Player_Heavy()
