@@ -105,6 +105,34 @@ namespace Behourd.Test
         }        */
 
         [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+                           "quand on calcule la somme des ancienneté des joueurs, " +
+                           "alors on obtient la difference d'ancienneté des  deux équipes")]
+
+        public void verify_team_affectation()
+        {
+            List<IJoueur> joueurs = new List<IJoueur>()
+            {
+
+            new Joueur(75,0),
+            new Joueur(70,2),
+            new Joueur(60,5),
+            new Joueur(90,3),
+            new Joueur(110,3),
+
+            };
+
+
+            Session session = new Session(joueurs);
+            var partie1 = session.DémarrerPartie();
+            var équipes = partie1.Équipes;
+
+
+            Assert.Equal(3, équipes.First().Joueurs.Length);
+            Assert.Equal(2, équipes.Last().Joueurs.Length);
+
+        }
+
+            [Fact(DisplayName = "Étant donné une liste de joueurs, " +
                             "quand on calcule la somme des ancienneté des joueurs, " +
                             "alors on obtient la difference d'ancienneté des  deux équipes")]
 
@@ -115,8 +143,8 @@ namespace Behourd.Test
 
             new Joueur(75,0),
             new Joueur(70,2),
-            new Joueur(60,3),
-            new Joueur(90, 3)
+            new Joueur(60,5),
+            new Joueur(90,3)
 
             };
 
@@ -128,6 +156,7 @@ namespace Behourd.Test
 
             int resultat_attendu = 4;
             int resultat_reel = session.diff_somme_anciennete(equipe1, equipe2);
+            
             Assert.Equal(resultat_attendu, resultat_reel);
 
         }

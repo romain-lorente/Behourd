@@ -69,12 +69,20 @@ namespace Behourd
         
         public int somme_anciennete(IÉquipe equipe)
         {
-            return 0;
+            int sum = 0;
+            for (int i = 0; i < equipe.Joueurs.Length; i++)
+            {
+                sum += equipe.Joueurs[i].exp;
+            }
+            return sum ;
         }
         
         public int diff_somme_anciennete(IÉquipe equipe1, IÉquipe equipe2)
         {
-            return 0;
+            int sum_equipe1 = somme_anciennete(equipe1);
+            int sum_equipe2 = somme_anciennete(equipe2);
+
+            return Math.Abs(sum_equipe1- sum_equipe2);
         }
 
         #endregion
