@@ -2,8 +2,13 @@
 {
     public class Joueur : IJoueur
     {
-        public Joueur(/*int poids, IArme arme*/)
-        {
+        public int poids { get; set; }
+
+        public Joueur() { }
+
+        public Joueur(int poids)
+        { 
+            this.poids = poids;
         }
     }
 }

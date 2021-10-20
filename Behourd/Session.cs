@@ -64,5 +64,9 @@ namespace Behourd
             _joueur.Add(joueurEnPlus);
            
         }
+
+        #region Méthodes de calcul
+
+        #endregion
     }
 }
