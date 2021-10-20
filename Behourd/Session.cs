@@ -57,6 +57,20 @@ namespace Behourd
             return Math.Abs(sum_equipe1- sum_equipe2);
         }
 
+        public int CalculerMoyenne(List<IJoueur> joueurs)
+        {
+            int moyenne = 0;
+
+            //TODO
+
+            return moyenne;
+        }
+
+        public CategoriePoids ObtenirCategoriePoids(int moyennePoids)
+        {
+            return CategoriePoids.SUPER_LOURD;
+        }
+
         #endregion
     }
 }
