@@ -96,10 +96,11 @@ namespace Behourd.Test
                 new Joueur(40),
                 new Joueur(60)
             };
+            Session session = new Session(joueurs);
 
             //TODO : enum CategoriePoids
-            int moyennePoids = Utils.CalculerMoyenne(joueurs);
-            CategoriePoids categorie = Utils.ObtenirCategoriePoids(moyennePoids);
+            int moyennePoids = session.CalculerMoyenne(joueurs);
+            CategoriePoids categorie = session.ObtenirCategoriePoids(moyennePoids);
 
             Assert.Equal(CategoriePoids.LEGER, categorie);
         }        */
