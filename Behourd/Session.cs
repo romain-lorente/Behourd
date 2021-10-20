@@ -61,7 +61,12 @@ namespace Behourd
         {
             int moyenne = 0;
 
-            //TODO
+            foreach(IJoueur j in joueurs)
+            {
+                moyenne += j.poids;
+            }
+
+            moyenne /= joueurs.Count();
 
             return moyenne;
         }
