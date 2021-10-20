@@ -85,7 +85,7 @@ namespace Behourd.Test
             Assert.Throws<System.InvalidOperationException>(() => session.DémarrerPartie());
         }
 
-        [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+        /*[Fact(DisplayName = "Étant donné une liste de joueurs, " +
                             "quand on calcule la moyenne des poids des joueurs, " +
                             "alors on obtient la catégorie moyenne de poids correspondante")]
         public void Get_Average_Weight_Class_Of_Team()
@@ -102,7 +102,39 @@ namespace Behourd.Test
             CategoriePoids categorie = Utils.ObtenirCategoriePoids(moyennePoids);
 
             Assert.Equal(CategoriePoids.LEGER, categorie);
+        }        */
+
+        [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+                            "quand on calcule la somme des ancienneté des joueurs, " +
+                            "alors on obtient la difference d'ancienneté des  deux équipes")]
+
+        public void Get_diffrence_bettween_siniority_Of_Teams()
+        {
+            List<IJoueur> joueurs = new List<IJoueur>()
+            {
+
+            new Joueur(75,0),
+            new Joueur(70,2),
+            new Joueur(60,3),
+            new Joueur(90, 3)
+
+            };
+
+            Session session = new Session(joueurs);
+            var partie1 = session.DémarrerPartie();
+            var équipes = partie1.Équipes;
+            IÉquipe equipe1 = équipes.First();
+            IÉquipe equipe2 = équipes.Last();
+
+            int resultat_attendu = 4;
+            int resultat_reel = session.diff_somme_anciennete(equipe1, equipe2);
+            Assert.Equal(resultat_attendu, resultat_reel);
+
         }
+
+    }
+
+
 
         //[Fact]
         //public void Player_Heavy()
@@ -121,5 +153,7 @@ namespace Behourd.Test
 
         //    var joueurLourds = JoueurGenerator.GenerateSpecific(ConfigureNextPlayer, 3);
         //}
+
     }
-}
+
+

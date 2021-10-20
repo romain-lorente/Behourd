@@ -66,6 +66,16 @@ namespace Behourd
         }
 
         #region Méthodes de calcul
+        
+        public int somme_anciennete(IÉquipe equipe)
+        {
+            return 0;
+        }
+        
+        public int diff_somme_anciennete(IÉquipe equipe1, IÉquipe equipe2)
+        {
+            return 0;
+        }
 
         #endregion
     }
