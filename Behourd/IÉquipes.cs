@@ -2,8 +2,7 @@
 {
     public interface IÉquipes
     {
-        int Nombre { get; }
-
+        int Nombre();
         IÉquipe First();
         IÉquipe Last();
     }

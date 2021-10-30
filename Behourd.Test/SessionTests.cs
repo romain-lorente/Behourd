@@ -22,7 +22,7 @@ namespace Behourd.Test
             //Assert = THEN = ALORS
             var équipes = partie.Équipes;
 
-            Assert.Equal(2, équipes.Nombre);
+            Assert.Equal(2, équipes.Nombre());
             Assert.Single(équipes.First().Joueurs);
             Assert.Single(équipes.Last().Joueurs);
 
