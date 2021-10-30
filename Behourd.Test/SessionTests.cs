@@ -85,24 +85,43 @@ namespace Behourd.Test
             Assert.Throws<System.InvalidOperationException>(() => session.DémarrerPartie());
         }
 
-        /*[Fact(DisplayName = "Étant donné une liste de joueurs, " +
-                            "quand on calcule la moyenne des poids des joueurs, " +
+        [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+                            "quand on souhaite calculer la catégorie moyenne de poids de l'équipe, " +
+                            "alors on obtient, dans un premier temps, une moyenne de poids")]
+        public void Get_Average_Weight_Of_Team()
+        {
+            List<IJoueur> joueurs = new List<IJoueur>()
+            {
+                new Joueur(80, 1),
+                new Joueur(60, 1),
+                new Joueur(40, 1)
+            };
+            Session session = new Session(joueurs);
+
+            //TODO : enum CategoriePoids
+            int moyennePoids = session.CalculerMoyenne(joueurs);
+
+            Assert.Equal(60, moyennePoids);
+        }
+
+        [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+                            "quand on a calculé la moyenne des poids des joueurs, " +
                             "alors on obtient la catégorie moyenne de poids correspondante")]
         public void Get_Average_Weight_Class_Of_Team()
         {
             List<IJoueur> joueurs = new List<IJoueur>()
             {
-                new Joueur(75),
-                new Joueur(40),
-                new Joueur(60)
+                new Joueur(75, 1),
+                new Joueur(40, 1),
+                new Joueur(60, 1)
             };
+            Session session = new Session(joueurs);
 
-            //TODO : enum CategoriePoids
-            int moyennePoids = Utils.CalculerMoyenne(joueurs);
-            CategoriePoids categorie = Utils.ObtenirCategoriePoids(moyennePoids);
+            int moyennePoids = session.CalculerMoyenne(joueurs);
+            CategoriePoids categorie = session.ObtenirCategoriePoids(moyennePoids);
 
             Assert.Equal(CategoriePoids.LEGER, categorie);
-        }        */
+        }
 
         [Fact(DisplayName = "Étant donné une liste de joueurs, " +
                            "quand on calcule la somme des ancienneté des joueurs, " +
