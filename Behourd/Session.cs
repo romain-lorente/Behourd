@@ -42,7 +42,7 @@ namespace Behourd
         public int somme_anciennete(IÉquipe equipe)
         {
             int sum = 0;
-            for (int i = 0; i < equipe.Joueurs.Length; i++)
+            for (int i = 0; i < equipe.Joueurs.Count; i++)
             {
                 sum += equipe.Joueurs[i].exp;
             }

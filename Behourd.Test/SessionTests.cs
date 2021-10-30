@@ -98,7 +98,6 @@ namespace Behourd.Test
             };
             Session session = new Session(joueurs);
 
-            //TODO : enum CategoriePoids
             int moyennePoids = session.CalculerMoyenne(joueurs);
 
             Assert.Equal(60, moyennePoids);
@@ -124,47 +123,41 @@ namespace Behourd.Test
         }
 
         [Fact(DisplayName = "Étant donné une liste de joueurs, " +
-                           "quand on calcule la somme des ancienneté des joueurs, " +
-                           "alors on obtient la difference d'ancienneté des  deux équipes")]
+                           "quand on affecte les joueurs à des équipes, " +
+                           "alors on s'assure que les équipes sont bien équilibrées")]
 
-        public void verify_team_affectation()
+        public void Verify_Team_Affectation()
         {
             List<IJoueur> joueurs = new List<IJoueur>()
             {
-
-            new Joueur(75,0),
-            new Joueur(70,2),
-            new Joueur(60,5),
-            new Joueur(90,3),
-            new Joueur(110,3),
-
+                new Joueur(75,0),
+                new Joueur(70,2),
+                new Joueur(60,5),
+                new Joueur(90,3),
+                new Joueur(110,3),
             };
-
 
             Session session = new Session(joueurs);
             var partie1 = session.DémarrerPartie();
             var équipes = partie1.Équipes;
 
-
-            Assert.Equal(3, équipes.First().Joueurs.Length);
-            Assert.Equal(2, équipes.Last().Joueurs.Length);
+            Assert.Equal(3, équipes.First().Joueurs.Count);
+            Assert.Equal(2, équipes.Last().Joueurs.Count);
 
         }
 
-            [Fact(DisplayName = "Étant donné une liste de joueurs, " +
-                            "quand on calcule la somme des ancienneté des joueurs, " +
-                            "alors on obtient la difference d'ancienneté des  deux équipes")]
+        [Fact(DisplayName = "Étant donné une liste de joueurs, " +
+                        "quand on calcule la somme des ancienneté des joueurs, " +
+                        "alors on obtient la difference d'ancienneté des  deux équipes")]
 
-        public void Get_diffrence_bettween_siniority_Of_Teams()
+        public void Get_Experience_Difference_Of_Teams()
         {
             List<IJoueur> joueurs = new List<IJoueur>()
             {
-
-            new Joueur(75,0),
-            new Joueur(70,2),
-            new Joueur(60,5),
-            new Joueur(90,3)
-
+                new Joueur(75,0),
+                new Joueur(70,2),
+                new Joueur(60,5),
+                new Joueur(90,3)
             };
 
             Session session = new Session(joueurs);
@@ -173,35 +166,11 @@ namespace Behourd.Test
             IÉquipe equipe1 = équipes.First();
             IÉquipe equipe2 = équipes.Last();
 
-            int resultat_attendu = 4;
+            int resultat_attendu = 0;
             int resultat_reel = session.diff_somme_anciennete(equipe1, equipe2);
             
             Assert.Equal(resultat_attendu, resultat_reel);
-
         }
 
     }
-
-
-
-        //[Fact]
-        //public void Player_Heavy()
-        //{
-        //    var joueursLégers = JoueurGenerator.GenerateSpecific(
-        //        configuration => configuration
-        //            .WithWeight(45)
-        //            .WithArme(arme => arme.WithWeight(15)), 
-        //        15);
-
-        //    var weights = new Stack<int>(new []{ 90, 75, 120 });
-        //    JoueurBuilder ConfigureNextPlayer(JoueurBuilder joueurBuilder)
-        //    {
-        //        return joueurBuilder.WithWeight(weights.Pop());
-        //    } 
-
-        //    var joueurLourds = JoueurGenerator.GenerateSpecific(ConfigureNextPlayer, 3);
-        //}
-
-    }
-
-
+}

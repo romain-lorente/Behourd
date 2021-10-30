@@ -1,7 +1,9 @@
-﻿namespace Behourd
+﻿using System.Collections.Generic;
+
+namespace Behourd
 {
     public interface IÉquipe
     {
-        IJoueur[] Joueurs { get; }
+        IList<IJoueur> Joueurs { get; }
     }
 }

@@ -8,12 +8,10 @@ namespace Behourd
 {
     public class Équipe : IÉquipe
     {
-        private readonly IJoueur _joueur;
-
-        public Équipe(IJoueur joueur)
+        public Équipe(IList<IJoueur> joueurs)
         {
-            _joueur = joueur;
+            Joueurs = joueurs;
         }
-        public IJoueur[] Joueurs => new[] { _joueur };
+        public IList<IJoueur> Joueurs { get; }
     }
 }

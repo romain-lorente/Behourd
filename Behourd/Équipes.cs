@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Behourd
 {
@@ -13,8 +10,24 @@ namespace Behourd
 
         public Équipes(List<IJoueur> joueurs)
         {
-            _first = new Équipe(joueurs.First());
-            _last = new Équipe(joueurs.Last());
+            _first = new Équipe(new List<IJoueur>());
+            _last = new Équipe(new List<IJoueur>());
+
+            bool estMembreEquipeUne = true;
+
+            foreach(IJoueur j in joueurs)
+            {
+                if(estMembreEquipeUne)
+                {
+                    _first.Joueurs.Add(j);
+                }
+                else
+                {
+                    _last.Joueurs.Add(j);
+                }
+
+                estMembreEquipeUne = !estMembreEquipeUne;
+            }
         }
 
         public int Nombre() => 2;
