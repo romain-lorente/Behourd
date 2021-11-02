@@ -30,6 +30,12 @@ namespace Behourd
             }
         }
 
+        public Équipes(Équipe e1, Équipe e2)
+        {
+            _first = e1;
+            _last = e2;
+        }
+
         public int Nombre() => 2;
         public IÉquipe First() => _first;
         public IÉquipe Last() => _last;

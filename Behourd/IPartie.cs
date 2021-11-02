@@ -2,6 +2,6 @@
 {
     public interface IPartie
     {
-        IÉquipes Équipes { get; }
+        IÉquipes Équipes { get; set; }
     }
 }

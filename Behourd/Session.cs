@@ -23,7 +23,7 @@ namespace Behourd
 
         private class Partie : IPartie
         {
-            public IÉquipes Équipes { get; }
+            public IÉquipes Équipes { get; set; }
 
             public Partie(List<IJoueur> joueurs)
             {
@@ -37,9 +37,73 @@ namespace Behourd
            
         }
 
-        public void EquilibrerEquipes()
+        public void EquilibrerEquipes(IPartie partie)
         {
-            
+            int lon = _joueur.Count;
+            int diffCategoriesARetenir = 0;
+            List<Équipes> equipesARetenir = new List<Équipes>();
+
+            for (int i = 1; i < lon; i++)
+            {
+                //On forme les deux équipes
+                List<IJoueur> joueursE1 = new List<IJoueur>()
+                {
+                    _joueur[0],
+                    _joueur[i]
+                };
+
+                List<IJoueur> joueursE2 = new List<IJoueur>(_joueur);
+                joueursE2.RemoveAt(i);
+                joueursE2.RemoveAt(0);
+
+                Équipe e1 = new Équipe(joueursE1);
+                Équipe e2 = new Équipe(joueursE2);
+
+                //Puis on récupère les catégories de poids de chaque équipe
+                CategoriePoids catE1 = ObtenirCategoriePoids(CalculerMoyenne(joueursE1));
+                CategoriePoids catE2 = ObtenirCategoriePoids(CalculerMoyenne(joueursE2));
+
+                //On calcule la différence entre les catégories
+                int diffCategories = Math.Abs((int)catE1 - (int)catE2);
+
+                if(equipesARetenir.Count > 0)
+                {
+                    //Si la combinaison en cours est meilleure que la précédente, alors on ne garde que la nouvelle
+                    if(diffCategories < diffCategoriesARetenir)
+                    {
+                        equipesARetenir.Clear();
+                        equipesARetenir.Add(new Équipes(e1, e2));
+                        diffCategoriesARetenir = diffCategories;
+                    }
+                    //On ajoute l'équipe à la liste de combinaisons à retenir si la différence de catégorie de poids est la même
+                    else if (diffCategories == diffCategoriesARetenir)
+                    {
+                        equipesARetenir.Add(new Équipes(e1, e2));
+                    }
+                }
+                else
+                {
+                    //A la première exécution, on ajoute directement l'équipe à la liste des combinaisons à retenir
+                    equipesARetenir.Add(new Équipes(e1, e2));
+                    diffCategoriesARetenir = diffCategories;
+                }
+            }
+
+            //A la sortie de la boucle, s'il n'y a qu'une équipe, alors on la retient
+            if (equipesARetenir.Count == 1)
+            {
+                partie.Équipes = equipesARetenir.First();
+            }
+            //Sinon, on compare les anciennetés
+            /*else
+            {
+                int diffAnciennete = 0;
+
+                foreach(Équipes eqs in equipesARetenir)
+                {
+
+                }
+            }*/
         }
 
         #region Méthodes de calcul

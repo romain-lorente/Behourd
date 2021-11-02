@@ -192,7 +192,7 @@ namespace Behourd.Test
 
             Session session = new Session(joueurs);
             IPartie partie = session.DémarrerPartie();
-            session.EquilibrerEquipes();
+            session.EquilibrerEquipes(partie);
             var équipes = partie.Équipes;
 
             Assert.True(équipes.First().Joueurs.Contains(j1));
@@ -225,7 +225,7 @@ namespace Behourd.Test
 
             Session session = new Session(joueurs);
             IPartie partie = session.DémarrerPartie();
-            session.EquilibrerEquipes();
+            session.EquilibrerEquipes(partie);
             var équipes = partie.Équipes;
 
             Assert.True(équipes.First().Joueurs.Contains(j1));
