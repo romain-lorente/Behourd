@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Behourd.Test.Utilities;
@@ -123,9 +122,8 @@ namespace Behourd.Test
         }
 
         [Fact(DisplayName = "Étant donné une liste de joueurs, " +
-                           "quand on affecte les joueurs à des équipes, " +
-                           "alors on s'assure que les équipes sont bien équilibrées")]
-
+                            "quand on affecte les joueurs à des équipes, " +
+                            "alors on s'assure que les équipes sont bien équilibrées")]
         public void Verify_Team_Affectation()
         {
             List<IJoueur> joueurs = new List<IJoueur>()
@@ -138,18 +136,16 @@ namespace Behourd.Test
             };
 
             Session session = new Session(joueurs);
-            var partie1 = session.DémarrerPartie();
-            var équipes = partie1.Équipes;
+            var partie = session.DémarrerPartie();
+            var équipes = partie.Équipes;
 
             Assert.Equal(3, équipes.First().Joueurs.Count);
             Assert.Equal(2, équipes.Last().Joueurs.Count);
-
         }
 
         [Fact(DisplayName = "Étant donné une liste de joueurs, " +
-                        "quand on calcule la somme des ancienneté des joueurs, " +
-                        "alors on obtient la difference d'ancienneté des  deux équipes")]
-
+                            "quand on calcule la somme des anciennetés des joueurs, " +
+                            "alors on obtient la difference d'ancienneté des deux équipes")]
         public void Get_Experience_Difference_Of_Teams()
         {
             List<IJoueur> joueurs = new List<IJoueur>()
@@ -161,8 +157,8 @@ namespace Behourd.Test
             };
 
             Session session = new Session(joueurs);
-            var partie1 = session.DémarrerPartie();
-            var équipes = partie1.Équipes;
+            var partie = session.DémarrerPartie();
+            var équipes = partie.Équipes;
             IÉquipe equipe1 = équipes.First();
             IÉquipe equipe2 = équipes.Last();
 
@@ -172,5 +168,70 @@ namespace Behourd.Test
             Assert.Equal(resultat_attendu, resultat_reel);
         }
 
+        [Fact(DisplayName = "Étant donné deux équipes non équilibrées, " +
+                            "quand on compare les combinaisons disponibles pour chaque équipe, " +
+                            "alors on prend la combinaison la plus équilibrée en termes de poids")]
+        public void Get_Balanced_Teams()
+        {
+            Joueur j1 = new Joueur(135, 10);
+            Joueur j2 = new Joueur(95, 4);
+            Joueur j3 = new Joueur(70, 7);
+            Joueur j4 = new Joueur(65, 1);
+
+            List<IJoueur> joueurs = new List<IJoueur>()
+            {
+                j1,
+                j2,
+                j3,
+                j4
+            };
+
+            //AB - CD (super lourd - welter)
+            //AC - BD (super lourd - mi lourd)
+            //AD - BC (super lourd - lourd) <=
+
+            Session session = new Session(joueurs);
+            IPartie partie = session.DémarrerPartie();
+            session.EquilibrerEquipes();
+            var équipes = partie.Équipes;
+
+            Assert.True(équipes.First().Joueurs.Contains(j1));
+            Assert.True(équipes.First().Joueurs.Contains(j4));
+            Assert.True(équipes.Last().Joueurs.Contains(j2));
+            Assert.True(équipes.Last().Joueurs.Contains(j3));
+        }
+
+        [Fact(DisplayName = "Étant donné deux équipes non équilibrées, " +
+                            "quand on compare plusieurs combinaisons d'équipes disponibles en termes de poids, " +
+                            "alors on prend la combinaison avec le plus petit écart d'expérience")]
+        public void Get_Balanced_Teams_According_To_Experience()
+        {
+            Joueur j1 = new Joueur(100, 1);
+            Joueur j2 = new Joueur(50, 10);
+            Joueur j3 = new Joueur(50, 1);
+            Joueur j4 = new Joueur(100, 10);
+
+            List<IJoueur> joueurs = new List<IJoueur>()
+            {
+                j1,
+                j2,
+                j3,
+                j4
+            };
+
+            //AB - CD ok
+            //AC - BD
+            //AD - BC
+
+            Session session = new Session(joueurs);
+            IPartie partie = session.DémarrerPartie();
+            session.EquilibrerEquipes();
+            var équipes = partie.Équipes;
+
+            Assert.True(équipes.First().Joueurs.Contains(j1));
+            Assert.True(équipes.First().Joueurs.Contains(j2));
+            Assert.True(équipes.Last().Joueurs.Contains(j3));
+            Assert.True(équipes.Last().Joueurs.Contains(j4));
+        }
     }
 }

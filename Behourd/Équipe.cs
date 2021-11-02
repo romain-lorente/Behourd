@@ -12,6 +12,7 @@ namespace Behourd
         {
             Joueurs = joueurs;
         }
+
         public IList<IJoueur> Joueurs { get; }
     }
 }

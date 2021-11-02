@@ -37,8 +37,12 @@ namespace Behourd
            
         }
 
+        public void EquilibrerEquipes()
+        {
+            
+        }
+
         #region Méthodes de calcul
-        
         public int somme_anciennete(IÉquipe equipe)
         {
             int sum = 0;
