@@ -106,6 +106,11 @@ namespace Behourd
             }*/
         }
 
+        public int NombreJoueurs()
+        {
+            return _joueur.Count;
+        }
+
         #region Méthodes de calcul
         public int somme_anciennete(IÉquipe equipe)
         {

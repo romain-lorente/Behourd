@@ -10,9 +10,6 @@ namespace Behourd.IHM
             Session session = CreerSession();
 
             BouclePrincipale(session);
-
-            //Fin du programme
-            Console.ReadLine();
         }
 
         static Session CreerSession()
@@ -52,7 +49,71 @@ namespace Behourd.IHM
 
         static void BouclePrincipale(Session s)
         {
-            
+            bool exec = true;
+
+            while(exec)
+            {
+                Console.WriteLine("1 : Lancer une partie");
+                Console.WriteLine("2 : Ajouter un joueur");
+                Console.WriteLine("3 : Quitter\n");
+
+                string cmd = Console.ReadLine();
+
+                switch(cmd)
+                {
+                    case "1":
+                        Console.WriteLine($"Lancement d'une partie comportant {s.NombreJoueurs()} joueurs.\n");
+                        DeroulementPartie(s);
+
+                        break;
+
+                    case "2":
+                        Console.WriteLine("Fonctionnalité non implémentée.\n");
+                        
+                        break;
+
+                    case "3":
+                        exec = false;
+
+                        break;
+
+                    default:
+                        Console.WriteLine("Commande non reconnue.\n");
+
+                        break;
+                }
+            }
+        }
+
+        static void DeroulementPartie(Session s)
+        {
+            Console.WriteLine("Équilibrage des équipes...");
+
+            IPartie partie = s.DémarrerPartie();
+            s.EquilibrerEquipes(partie);
+
+            Console.WriteLine("Les équipes ont été formées.\n");
+
+            PresentationEquipes(partie);
+
+            Console.WriteLine("\n\nEntrez n'importe quelle commande pour quitter cette partie.");
+            Console.ReadLine();
+        }
+
+        static void PresentationEquipes(IPartie partie)
+        {
+            Console.WriteLine("Équipe 1 : \n");
+            PresentationEquipe(partie.Équipes.First());
+            Console.WriteLine("\nÉquipe 2 : \n");
+            PresentationEquipe(partie.Équipes.Last());
+        }
+
+        static void PresentationEquipe(IÉquipe e)
+        {
+            foreach(IJoueur j in e.Joueurs)
+            {
+                Console.WriteLine($"{j.nom} {j.prenom}");
+            }
         }
     }
 }
