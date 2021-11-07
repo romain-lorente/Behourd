@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31702.278
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behourd", "Behourd\Behourd.csproj", "{B965BAA1-C4F6-411B-8EC9-D6C261388A85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behourd", "Behourd\Behourd.csproj", "{B965BAA1-C4F6-411B-8EC9-D6C261388A85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behourd.Test", "Behourd.Test\Behourd.Test.csproj", "{4C0CF09D-9206-4CA4-BF43-69A7729B4062}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Behourd.Test", "Behourd.Test\Behourd.Test.csproj", "{4C0CF09D-9206-4CA4-BF43-69A7729B4062}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Behourd.IHM", "Behourd.IHM\Behourd.IHM.csproj", "{048B89C4-37C2-49D1-A401-D4EB44F4F7F6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4C0CF09D-9206-4CA4-BF43-69A7729B4062}.Release|Any CPU.Build.0 = Release|Any CPU
+		{048B89C4-37C2-49D1-A401-D4EB44F4F7F6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{048B89C4-37C2-49D1-A401-D4EB44F4F7F6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{048B89C4-37C2-49D1-A401-D4EB44F4F7F6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{048B89C4-37C2-49D1-A401-D4EB44F4F7F6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
