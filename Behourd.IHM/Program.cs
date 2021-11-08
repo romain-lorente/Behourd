@@ -1,5 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 
 namespace Behourd.IHM
 {
@@ -28,19 +32,7 @@ namespace Behourd.IHM
         {
             Console.WriteLine("Chargement des données des joueurs...\n");
 
-            //TODO : données temporaires, utiliser le fichier
-            List<IJoueur> joueurs = new List<IJoueur>
-            {
-                new Joueur(134, 15, "GROS", "Paul"),
-                new Joueur(47, 1, "BLANC", "Louis"),
-                new Joueur(79, 34, "GIRAUD", "Jean-Michel"),
-                new Joueur(102, 18, "PÄRIS", "Théophile")
-            };
-
-            foreach(Joueur j in joueurs)
-            {
-                Console.WriteLine($"Joueur {j.nom} {j.prenom} ({j.poids}kg, {j.exp} années d'expérience) ajouté.");
-            }
+            List<IJoueur> joueurs = ChargerJoueursFichier();
 
             Console.WriteLine("Joueurs chargés.\n");
 
@@ -114,6 +106,49 @@ namespace Behourd.IHM
             {
                 Console.WriteLine($"{j.nom} {j.prenom}");
             }
+        }
+
+        static List<IJoueur> ChargerJoueursFichier()
+        {
+            XSSFWorkbook wb;
+            List<IJoueur> joueurs = new List<IJoueur>();
+            string chemin = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName + @"\Behourd\res\donnees.xlsx";
+
+            using (FileStream fichier = new FileStream(chemin, FileMode.Open, FileAccess.Read))
+            {
+                wb = new XSSFWorkbook(chemin);
+            }
+
+            ISheet feuille = wb.GetSheet("Feuil1");
+            for (int l = 1; l <= feuille.LastRowNum; l++)
+            {
+                IRow ligne = feuille.GetRow(l);
+
+                if (ligne != null)
+                {
+                    Joueur j = CreerEntiteJoueur(ligne);
+                    joueurs.Add(j);
+
+                    Console.WriteLine($"Joueur {j.nom} {j.prenom} ({j.poids}kg, {j.exp} années d'expérience) ajouté.");
+                }
+            }
+
+            return joueurs;
+        }
+
+        static Joueur CreerEntiteJoueur(IRow ligne)
+        {
+            string nom = ligne.GetCell(0).StringCellValue;
+            string prenom = ligne.GetCell(1).StringCellValue;
+            string strPoids = ligne.GetCell(2).StringCellValue;
+            double dAnnee = ligne.GetCell(3).NumericCellValue;
+
+            DateTime dateAdhesion = new DateTime().AddYears((int)dAnnee - 1);
+
+            int poids = int.Parse(strPoids.Replace("kg", ""));
+            int exp = DateTime.Today.Year - dateAdhesion.Year;
+
+            return new Joueur(poids, exp, nom, prenom);
         }
     }
 }
