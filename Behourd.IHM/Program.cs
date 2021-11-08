@@ -61,17 +61,34 @@ namespace Behourd.IHM
 
                     case "2":
                         List<IJoueur> joueurs = new List<IJoueur>();
+                        bool continuer = true;
                         Console.WriteLine("Ajout d'un nouveau joueur.\n");
-                        Console.WriteLine("Nom du joueur: \n");
-                        string nom = Console.ReadLine();
-                        Console.WriteLine("Prénom du joueur: \n");
-                        string prenom = Console.ReadLine();
-                        Console.WriteLine("poids du joueur: \n");
-                        int poids = int.Parse(Console.ReadLine());
-                        int expérience = 0;
-                        Joueur j = new Joueur(poids, expérience, nom, prenom);
-                        joueurs.Add(j);
-                        break;
+                        while(continuer)
+                        {
+                            Console.WriteLine("Nom du joueur: \n");
+                            string nom = Console.ReadLine();
+                            Console.WriteLine("Prénom du joueur: \n");
+                            string prenom = Console.ReadLine();
+                            Console.WriteLine("poids du joueur: \n");
+                            int poids = int.Parse(Console.ReadLine());
+                            int expérience = 0;
+                            Joueur j = new Joueur(poids, expérience, nom, prenom);
+                            joueurs.Add(j);
+                            Console.WriteLine("Voulez vous ajouter un nouveau joueur ?\n");
+                            Console.WriteLine("1 : OUI");
+                            Console.WriteLine("2 : NON");
+                            int réponse = int.Parse(Console.ReadLine());
+                            if (réponse==1)
+                            {
+                                continuer=true;
+                            }
+                            else
+                            {
+                                continuer=false;
+                            }
+
+                        }
+                       
                         break;
 
                     case "3":
