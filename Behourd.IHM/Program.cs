@@ -60,8 +60,42 @@ namespace Behourd.IHM
                         break;
 
                     case "2":
-                        Console.WriteLine("Fonctionnalité non implémentée.\n");
-                        
+                        bool continuer = true;
+                        Console.WriteLine("Ajout d'un nouveau joueur.\n");
+
+                        while(continuer)
+                        {
+                            Console.WriteLine("Nom du joueur: \n");
+                            string nom = Console.ReadLine();
+
+                            Console.WriteLine("Prénom du joueur: \n");
+                            string prenom = Console.ReadLine();
+
+                            Console.WriteLine("poids du joueur: \n");
+                            int poids = int.Parse(Console.ReadLine());
+
+                            int expérience = 0;
+
+                            Joueur j = new Joueur(poids, expérience, nom, prenom);
+                            s.AddPlayer(j);
+                            MsgAjoutJoueur(j);
+
+                            Console.WriteLine("Voulez vous ajouter un nouveau joueur ?\n");
+                            Console.WriteLine("1 : OUI");
+                            Console.WriteLine("2 : NON");
+                            int réponse = int.Parse(Console.ReadLine());
+
+                            if (réponse==1)
+                            {
+                                continuer=true;
+                            }
+                            else
+                            {
+                                continuer=false;
+                            }
+
+                        }
+                       
                         break;
 
                     case "3":
@@ -102,10 +136,20 @@ namespace Behourd.IHM
 
         static void PresentationEquipe(IÉquipe e)
         {
-            foreach(IJoueur j in e.Joueurs)
+            PresentationJoueurs(e.Joueurs);
+        }
+
+        static void PresentationJoueurs(IList<IJoueur> joueurs)
+        {
+            foreach (IJoueur j in joueurs)
             {
                 Console.WriteLine($"{j.nom} {j.prenom}");
             }
+        }
+
+        static void MsgAjoutJoueur(IJoueur j)
+        {
+            Console.WriteLine($"Joueur {j.nom} {j.prenom} ({j.poids}kg, {j.exp} années d'expérience) ajouté.");
         }
 
         static List<IJoueur> ChargerJoueursFichier()
@@ -129,7 +173,7 @@ namespace Behourd.IHM
                     Joueur j = CreerEntiteJoueur(ligne);
                     joueurs.Add(j);
 
-                    Console.WriteLine($"Joueur {j.nom} {j.prenom} ({j.poids}kg, {j.exp} années d'expérience) ajouté.");
+                    MsgAjoutJoueur(j);
                 }
             }
 
