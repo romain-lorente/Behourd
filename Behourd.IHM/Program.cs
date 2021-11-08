@@ -143,10 +143,8 @@ namespace Behourd.IHM
             string strPoids = ligne.GetCell(2).StringCellValue;
             double dAnnee = ligne.GetCell(3).NumericCellValue;
 
-            DateTime dateAdhesion = new DateTime().AddYears((int)dAnnee - 1);
-
             int poids = int.Parse(strPoids.Replace("kg", ""));
-            int exp = DateTime.Today.Year - dateAdhesion.Year;
+            int exp = DateTime.Today.Year - ((int)dAnnee);
 
             return new Joueur(poids, exp, nom, prenom);
         }
