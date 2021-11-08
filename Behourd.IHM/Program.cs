@@ -60,8 +60,18 @@ namespace Behourd.IHM
                         break;
 
                     case "2":
-                        Console.WriteLine("Fonctionnalité non implémentée.\n");
-                        
+                        List<IJoueur> joueurs = new List<IJoueur>();
+                        Console.WriteLine("Ajout d'un nouveau joueur.\n");
+                        Console.WriteLine("Nom du joueur: \n");
+                        string nom = Console.ReadLine();
+                        Console.WriteLine("Prénom du joueur: \n");
+                        string prenom = Console.ReadLine();
+                        Console.WriteLine("poids du joueur: \n");
+                        int poids = int.Parse(Console.ReadLine());
+                        int expérience = 0;
+                        Joueur j = new Joueur(poids, expérience, nom, prenom);
+                        joueurs.Add(j);
+                        break;
                         break;
 
                     case "3":
